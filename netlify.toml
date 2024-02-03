@@ -1,4 +1,4 @@
 [build]
   functions = "functions"
-  command = "echo 'Deploying'"
+  command = "yarn build"
   publish = "build"
