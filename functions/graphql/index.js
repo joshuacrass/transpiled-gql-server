@@ -1,18 +1,16 @@
 const { ApolloServer, gql } = require('apollo-server-lambda');
 const mongoose = require('mongoose');
+const Article = require('./models/articles');
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 // Define your schema
 const typeDefs = gql`
   type Article {
     id: ID!
-    title: String!
-    content: String!
+    title: String
+    content: String
   }
 
   type Query {
@@ -20,16 +18,14 @@ const typeDefs = gql`
   }
 `;
 
-// Define resolvers
+// Define your resolvers
 const resolvers = {
   Query: {
-    articles: async () => {
-      // Assuming you have an Article model
-      return await Article.find({});
-    },
+    articles: async () => await Article.find({}),
   },
 };
 
-// Create and start the server
+// Create Apollo Server
 const server = new ApolloServer({ typeDefs, resolvers });
+
 exports.handler = server.createHandler();
