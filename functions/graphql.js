@@ -9,7 +9,7 @@ const server = new ApolloServer({
   resolvers,
 });
 
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   const { handler } = await startStandaloneServer(server, {
     context: ({ event, context }) => ({
       headers: event.headers,
