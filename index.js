@@ -28,7 +28,15 @@ const typeDefs = `#graphql
     _id: ID!
     title: String
     author: Author
-    content: String
+    createdAt: String
+    lastUpdatedAt: String
+    imageURL: String
+    version: Int
+    summary: String
+    status: String
+    views: Int
+    likes: Int
+    contentBlocks: [ContentBlock]
   }
 
   type Author {
@@ -41,6 +49,13 @@ const typeDefs = `#graphql
     articles: [Article]
     authors: [Author]
   }
+
+  type ContentBlock {
+  id: Int!
+  type: String!
+  data: String!
+  language: String
+}
 `;
 
 // Resolvers for GraphQL operations
