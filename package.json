@@ -1,11 +1,11 @@
 {
   "name": "transpiled-gql-server",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@apollo/server": "^4.10.0",
