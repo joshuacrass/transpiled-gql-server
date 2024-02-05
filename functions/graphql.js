@@ -1,8 +1,8 @@
 // netlify/functions/graphql.js
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import typeDefs from '../typeDefs'; // Adjust the path as needed
-import resolvers from '../resolvers'; // Adjust the path as needed
+import typeDefs from '../typeDefs.js'; // Adjust the path as needed
+import resolvers from '../resolvers.js'; // Adjust the path as needed
 
 const server = new ApolloServer({
   typeDefs,
