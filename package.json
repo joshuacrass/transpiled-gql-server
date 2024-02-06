@@ -1,16 +1,16 @@
 {
   "name": "transpiled-gql-server",
   "version": "0.0.1",
-  "main": "server.js",
   "license": "MIT",
   "type": "module",
-  "scripts": {
-    "start": "node server.js"
-  },
   "dependencies": {
     "@apollo/server": "^4.10.0",
+    "@as-integrations/aws-lambda": "^3.1.0",
     "dotenv": "^16.4.1",
     "graphql": "^16.8.1",
     "mongodb": "^6.3.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^13.3.3"
   }
 }
