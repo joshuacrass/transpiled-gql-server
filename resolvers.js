@@ -23,6 +23,12 @@ const resolvers = {
         .limit(3)
         .toArray();
     },
+    getArticleById: async (_, { _id }) => {
+      const db = await connectToMongoDB();
+      return await db
+        .collection('articles')
+        .findOne({ _id: new ObjectId(_id) });
+    },
     authors: async () => {
       const db = await connectToMongoDB();
       return await db.collection('authors').find().toArray();
