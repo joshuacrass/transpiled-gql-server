@@ -25,6 +25,7 @@ const typeDefs = `#graphql
 
   type Query {
     articles(status: String): [Article]
+    topLikedArticles: [Article]
     authors: [Author]
   }
 

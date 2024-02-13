@@ -13,6 +13,16 @@ const resolvers = {
       }
       return await db.collection('articles').find(query).toArray();
     },
+    topLikedArticles: async () => {
+      const db = await connectToMongoDB();
+
+      return await db
+        .collection('articles')
+        .find({})
+        .sort({ likes: -1 })
+        .limit(3)
+        .toArray();
+    },
     authors: async () => {
       const db = await connectToMongoDB();
       return await db.collection('authors').find().toArray();
