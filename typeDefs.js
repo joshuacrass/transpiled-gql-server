@@ -14,6 +14,7 @@ const typeDefs = `#graphql
     likes: Int
     contentBlocks: [ContentBlock]
     tags: [String]
+    language: String
   }
 
   type Author {
@@ -39,6 +40,7 @@ const typeDefs = `#graphql
       likes: Int
       contentBlocks: [ContentBlockInput]
       tags: [String]
+      language: String
     ): Article
 
   }
