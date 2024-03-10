@@ -17,15 +17,36 @@ const typeDefs = `#graphql
     language: String
   }
 
+  type Video {
+    _id: ID!
+    title: String
+    author: Author
+    createdAt: String
+    lastUpdatedAt: String
+    imageURL: String
+    videoURL: String
+    version: Int
+    summary: String
+    status: String
+    views: Int
+    likes: Int
+    tags: [String]
+    language: String
+  }
+
   type Author {
     _id: ID!
     name: String
     articles: [Article]
+    videos: [Video]
+    imageURL: String
   }
 
   type Query {
     articles(status: String): [Article]
+    videos: [Video]
     getArticleById(_id: ID!): Article
+    getVideoById(_id: ID!): Video
     topLikedArticles: [Article]
     authors: [Author]
   }
