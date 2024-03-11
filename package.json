@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "license": "MIT",
   "type": "module",
+  "scripts": {
+    "start": "serverless offline start",
+    "deploy": "serverless deploy",
+    "dev": "node server.js"
+  },
   "dependencies": {
     "@apollo/server": "^4.10.0",
     "@as-integrations/aws-lambda": "^3.1.0",
