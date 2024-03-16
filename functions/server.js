@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { ApolloServer } from '@apollo/server';
 import {
   startServerAndCreateLambdaHandler,
@@ -7,7 +8,6 @@ import {
 import typeDefs from '../typeDefs.js';
 import resolvers from '../resolvers.js';
 
-console.log('Setting up the Server');
 const server = new ApolloServer({
   typeDefs,
   resolvers,

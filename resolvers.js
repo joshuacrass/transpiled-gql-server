@@ -1,25 +1,26 @@
+/* eslint-disable no-underscore-dangle */
 // resolvers.js
-import connectToMongoDB from './db.js';
 import { ObjectId } from 'mongodb';
+import connectToMongoDB from './db.js';
 
 const resolvers = {
   Query: {
     articles: async (_, args) => {
       const db = await connectToMongoDB();
-      let query = {};
+      const query = {};
       if (args.status) {
         query.status = args.status;
       }
-      return await db.collection('articles').find(query).toArray();
+      return db.collection('articles').find(query).toArray();
     },
     videos: async () => {
       const db = await connectToMongoDB();
-      return await db.collection('videos').find({}).toArray();
+      return db.collection('videos').find({}).toArray();
     },
     topLikedArticles: async () => {
       const db = await connectToMongoDB();
 
-      return await db
+      return db
         .collection('articles')
         .find({})
         .sort({ likes: -1 })
@@ -28,23 +29,21 @@ const resolvers = {
     },
     getArticleById: async (_, { _id }) => {
       const db = await connectToMongoDB();
-      return await db
-        .collection('articles')
-        .findOne({ _id: new ObjectId(_id) });
+      return db.collection('articles').findOne({ _id: new ObjectId(_id) });
     },
     getVideoById: async (_, { _id }) => {
       const db = await connectToMongoDB();
-      return await db.collection('videos').findOne({ _id: new ObjectId(_id) });
+      return db.collection('videos').findOne({ _id: new ObjectId(_id) });
     },
     authors: async () => {
       const db = await connectToMongoDB();
-      return await db.collection('authors').find().toArray();
+      return db.collection('authors').find().toArray();
     },
   },
   Article: {
     author: async (parent) => {
       const db = await connectToMongoDB();
-      return await db
+      return db
         .collection('authors')
         .findOne({ _id: new ObjectId(parent.author) });
     },
@@ -52,7 +51,7 @@ const resolvers = {
   Video: {
     author: async (parent) => {
       const db = await connectToMongoDB();
-      return await db
+      return db
         .collection('authors')
         .findOne({ _id: new ObjectId(parent.author) });
     },
@@ -60,7 +59,7 @@ const resolvers = {
   Author: {
     articles: async (parent) => {
       const db = await connectToMongoDB();
-      return await db
+      return db
         .collection('articles')
         .find({ author: new ObjectId(parent._id) })
         .toArray();
@@ -68,21 +67,20 @@ const resolvers = {
   },
   Mutation: {
     createArticle: async (_, articleData) => {
+      const data = articleData;
       // Connect to MongoDB
       const db = await connectToMongoDB();
 
       // Add createdAt and lastUpdatedAt fields
-      articleData.createdAt = new Date().toISOString();
-      articleData.lastUpdatedAt = new Date().toISOString();
+      data.createdAt = new Date().toISOString();
+      data.lastUpdatedAt = new Date().toISOString();
 
       // Convert author to ObjectId
-      articleData.author = new ObjectId(articleData.author);
+      data.author = new ObjectId(data.author);
 
       // Insert the article
-      const insertedArticle = await db
-        .collection('articles')
-        .insertOne(articleData);
-      return await db
+      const insertedArticle = db.collection('articles').insertOne(data);
+      return db
         .collection('articles')
         .findOne({ _id: new ObjectId(insertedArticle.insertedId) });
     },

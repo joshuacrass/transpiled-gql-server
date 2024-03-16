@@ -24,25 +24,19 @@ let client;
 
 // Connects to MongoDB using the constructed URI
 async function connectToMongoDB() {
-  try {
-    validateEnvVariables();
+  validateEnvVariables();
 
-    const uri = constructMongoDBUri();
+  const uri = constructMongoDBUri();
 
-    if (!client) {
-      client = new MongoClient(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-      await client.connect();
-      console.log('Connected to MongoDB');
-    }
-
-    return client.db(process.env.DB_NAME);
-  } catch (error) {
-    console.error('Could not connect to MongoDB', error);
-    throw error;
+  if (!client) {
+    client = new MongoClient(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    await client.connect();
   }
+
+  return client.db(process.env.DB_NAME);
 }
 
 export default connectToMongoDB;
